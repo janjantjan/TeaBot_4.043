@@ -37,21 +37,19 @@ class DiscordBot {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   onMessage(message) {
     var channelToSend = this.client.channels.cache.get(CHANNELID);
-    
-
     // when discordbot receives a message it calls the fromDiscordBot function in p5 and relays the message to p5
     this.win.webContents.send("fromDiscordBot", message.content);
     
-    // if discordbot receives 'hey' from discord, it replies with 'ho'
-    if (message.content.includes("hey")) {  
+    
+    if (message.content.includes("!pour")) {  
       if (message.author == this.client.user) {
         return;
        }
       else{
-        // send message to discord
-        message.reply("wut");
-        message.react("👍");
-        channelToSend.send("heyyy "+ message.author.toString());
+        let pourCommand = message.content.split(" ");
+        var person = pourCommand[1];
+        let pourReply = message.author.toString() +  " pours a drink for " +  person.toString() ;
+        channelToSend.send(pourReply).then(sentPourReply => {sentPourReply.react("☕");});
       }
     }
 

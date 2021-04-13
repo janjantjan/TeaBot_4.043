@@ -1,5 +1,5 @@
 const { ipcRenderer } = require("electron");  // allows p5 to talk to main and discordbot
-const serialPort = require('serialport');
+//const serialPort = require('serialport');
 var sp = null;
 
 let speed = 1;
@@ -11,7 +11,7 @@ function setup() {
   createCanvas(800, 600);
   y = height / 2;
 
- listSerialPort();
+ //listSerialPort();
  
 }
 
@@ -53,7 +53,7 @@ function messageToDiscord(data) {
 }
 
 // receives messages from Discord, and passes it to Arduino
-ipcRenderer.on("fromDiscordBot", (event, message) => {
+/*ipcRenderer.on("fromDiscordBot", (event, message) => {
   console.log(message); // prints message so we can see it
 
   sendToArduino(message);
@@ -85,12 +85,13 @@ function listSerialPort() {
     ports => ports.forEach(console.log),
     err => console.error(err)
   )
-  */
+  
 
 
   //initialize serialport with 115200 baudrate.
-   sp = new serialPort('/dev/tty.usbserial-1410', {
+     sp = new serialPort('/dev/ttys5', {
     baudRate: 115200,
+
   });
 
   sp.write( "start!", function(err) {
@@ -99,6 +100,7 @@ function listSerialPort() {
     }
     console.log('message written');
   });
+  
 
 }
 
@@ -109,3 +111,4 @@ function sendToArduino(data) {
 
 }
 
+*/
