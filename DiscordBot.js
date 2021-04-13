@@ -1,7 +1,7 @@
 const { Client, MessageEmbed } = require("discord.js");
 const { Notification, ipcMain } = require("electron");
 
-const TOKEN = "ODMwMTM2NTQ3NzU5NzUxMjA5.YHCS6A.arbj3hGqlQMSY8ayORx2xoCXNN8";
+const TOKEN = "ODMwMTM2NTQ3NzU5NzUxMjA5.YHCS6A.7TuQKSNnbvubLG2DQMwdshKi_Jw";
 const CHANNELID = "830140790981656606";
 
 
@@ -16,10 +16,11 @@ class DiscordBot {
     this.client.login(token);
   }
 
-//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\| Don't touch for now
   onReady() {
     console.log("Discord bot ready!");
   }
+
+
   showNotification(message = "Notification from the Main process") {
     const notification = {
       title: "Basic Notification",
@@ -27,16 +28,18 @@ class DiscordBot {
     };
     new Notification(notification).show();
   }
+
   // function used to send messages originating in p5 to discord
   sendMessageToDiscord(data) {
+  
     var channelToSend = this.client.channels.cache.get(CHANNELID);
     channelToSend.send(data);
-  }
-//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  }
+
+  // This is mostly likely the only function you will need to edit in this file. 
+  // It gets data from Discord server and decides what to do with it. 
   onMessage(message) {
-    var channelToSend = this.client.channels.cache.get(CHANNELID);
     
 
     // when discordbot receives a message it calls the fromDiscordBot function in p5 and relays the message to p5
@@ -44,21 +47,14 @@ class DiscordBot {
     
     // if discordbot receives 'hey' from discord, it replies with 'ho'
     if (message.content.includes("hey")) {  
-      if (message.author == this.client.user) {
-        return;
-       }
-      else{
-        // send message to discord
-        message.reply("wut");
-        message.react("👍");
-        channelToSend.send("heyyy "+ message.author.toString());
-      }
+      // send message to discord
+      message.reply("ho");
     }
 
-    /* This block of code listen for a thumbs up emoji in Discord. 
+    // This block of code listen for a thumbs up emoji in Discord. 
     // When it sees it, it calls the thumbsup function in p5
     if (message.content.includes("👍")) {
-      this.showNotification("Like from discord");
+      //this.showNotification("Like from discord");
       const thumbsup = message.content.split("👍");
       const count = thumbsup.length;
       this.win.webContents.send("thumbsup", count - 1);
@@ -112,9 +108,6 @@ class DiscordBot {
     }
     */
   }
-
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
 
 
