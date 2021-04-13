@@ -1,9 +1,9 @@
 const { Client, MessageEmbed } = require("discord.js");
 const { Notification, ipcMain } = require("electron");
 
-const TOKEN = "ODMwMTM2NTQ3NzU5NzUxMjA5.YHCS6A.arbj3hGqlQMSY8ayORx2xoCXNN8";
+const TOKEN = "";
 const CHANNELID = "830140790981656606";
-
+//ODMwMTM2NTQ3NzU5NzUxMjA5.YHCS6A.arbj3hGqlQMSY8ayORx2xoCXNN8//oo
 
 class DiscordBot {
   constructor(win, token = TOKEN) {
