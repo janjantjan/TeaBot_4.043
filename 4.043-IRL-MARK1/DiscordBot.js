@@ -17,7 +17,7 @@ class DiscordBot {
   }
 
   onReady() {
-    console.log("Discord bot ready!");
+    console.log("Teabot is ready to go!");
   }
 
 
@@ -46,9 +46,9 @@ class DiscordBot {
     this.win.webContents.send("fromDiscordBot", message.content);
     
     // if discordbot receives 'hey' from discord, it replies with 'ho'
-    if (message.content.includes("hey")) {  
+    if (message.content.includes("pour")) {  
       // send message to discord
-      message.reply("ho");
+      message.react("☕");
     }
 
     // This block of code listen for a thumbs up emoji in Discord. 
