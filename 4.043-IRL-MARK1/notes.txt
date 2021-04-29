@@ -1,0 +1,38 @@
+Interactions to code:
+
+SET UP!
+!hello
+TeaBot: Hello! Who is chatting today
+!me
+!me
+TeaBot: Welcome! Are your pots ready? (Reactions)
+
+
+<Week of 4/25 plan for code>
+
+POUR FOR A PERSON
+--> While button press from object A
+Teabot: @personA wants to pour @personB a drink! (Teabot sends this out to discord)
+Teabot: Sends drink emoji + @personB + ready!
+
+    Situation 1:
+    --> Person B presses button at the same time
+    Teabot: @personA is pouring @personB a drink!
+    --> PersonB is no longer pouring
+    Teabot: Sends drink emoji + @personA + finished pouring!
+
+    Situation 2:
+    --> Person A releases button before drink is accepted
+    TeaBot: Sends drink emoji + @personA + finished pouring!
+
+ASKING FOR A DRINK
+    Situation 1:
+    --> TeaBot Detects the word "drink" and assumes the sender wants a drink
+    TeaBot: @sender would you like a drink? (with emoji)
+    --> If person reacts
+    TeaBot: @sender requests a pour from @otherperson
+
+
+END!
+--> !END
+TeaBot: Goodbye @personA, @PersonB

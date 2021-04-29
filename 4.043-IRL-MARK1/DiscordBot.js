@@ -1,7 +1,7 @@
 const { Client, MessageEmbed } = require("discord.js");
 const { Notification, ipcMain } = require("electron");
 
-const TOKEN = "";
+const TOKEN = "!!!!!!!!";
 const CHANNELID = "830140790981656606";
 //ODMwMTM2NTQ3NzU5NzUxMjA5.YHCS6A.arbj3hGqlQMSY8ayORx2xoCXNN8//oo
 
@@ -14,6 +14,7 @@ class DiscordBot {
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("message", this.onMessage.bind(this));
     this.client.login(token);
+
   }
 
 //|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\| Don't touch for now
@@ -34,7 +35,8 @@ class DiscordBot {
   }
 //|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|//|\\|
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> All the messages that cause TeaBot to do something
+
   onMessage(message) {
     var channelToSend = this.client.channels.cache.get(CHANNELID);
     // when discordbot receives a message it calls the fromDiscordBot function in p5 and relays the message to p5
@@ -42,7 +44,7 @@ class DiscordBot {
     
     
     if (message.content.includes("!pour")) {  
-      if (message.author == this.client.user) {
+      if (message.author == this.client.user) { //Prevents message loop with self
         return;
        }
       else{
@@ -52,6 +54,22 @@ class DiscordBot {
         channelToSend.send(pourReply).then(sentPourReply => {sentPourReply.react("☕");});
       }
     }
+
+    if (message.content.includes("!drink")) {  
+      if (message.author == this.client.user) { //Prevents message loop with self
+        return;
+       }
+      else{
+        
+        let drinkReply = message.author.toString() +  " would like a drink!" ;
+        channelToSend.send(drinkReply).then(sentDrinkReply => {sentDrinkReply.react("☕");});
+      }
+    }
+
+    //payload reaction 
+    //https://stackoverflow.com/questions/67036155/discord-py-send-a-message-after-user-reacts-to-a-message
+    //https://stackoverflow.com/questions/49842712/discord-js-message-after-receiving-emoji-reaction
+    
 
     /* This block of code listen for a thumbs up emoji in Discord. 
     // When it sees it, it calls the thumbsup function in p5
